@@ -1,0 +1,3 @@
+[submodule "tasks"]
+	path = tasks
+	url = git@github.com:bertrandpeyce/ansible-playbooks-tasks.git
