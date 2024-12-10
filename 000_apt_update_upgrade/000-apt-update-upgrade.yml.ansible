@@ -1,0 +1,8 @@
+---
+- name: Example 000 - Run apt update and upgrade
+  hosts: all
+  become: true
+  tasks:
+      - name: Update and upgrade apt packages
+        ansible.builtin.include_tasks:
+          file: ../tasks/apt/apt-update-upgrade.yml.ansible
