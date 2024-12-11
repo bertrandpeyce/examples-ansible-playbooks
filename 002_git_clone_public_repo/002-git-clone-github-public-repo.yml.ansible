@@ -1,0 +1,15 @@
+---
+- name: Cloning Git Repository
+  hosts: all
+  vars:
+    git_repo_url: https://github.com/bertrandpeyce/examples-docker-compose
+    git_repo_dest: /tmp/examples-docker-compose
+    git_repo_version: main
+  tasks:
+    - name: Cloning {{ git_repo_url }} to {{ git_repo_dest }}
+      ansible.builtin.git:
+        repo: "{{ git_repo_url }}"
+        dest: "{{ git_repo_dest }}"
+        version: "{{ git_repo_version }}"
+        single_branch: yes
+
