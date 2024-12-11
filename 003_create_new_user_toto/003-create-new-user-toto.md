@@ -31,3 +31,13 @@ Don't hesitate to use the `help`
 ```bash
 mkpasswd --help
 ```
+
+We also provide a public ssh-key for remote connexion to this user.  
+
+To create a pair key use can use the command `ssh-keygen` and follow the instructions:
+
+```bash
+ssh-keygen -t ed25519 -C "toto@example.com"
+```
+
+
