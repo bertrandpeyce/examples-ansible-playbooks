@@ -1,0 +1,16 @@
+---
+- name: Example 001 - All in one
+  hosts: all
+  vars:
+    docker_git_url: https://github.com/bertrandpeyce/examples-docker-compose
+    docker_git_dest: "/tmp/examples-docker-compose"
+    docker_compose_dir: "{{ docker_git_dest }}/000_wordpress"
+    wordpress_port: "8080"
+    mysql_port: "3306"
+
+- ansible.builtin.import_playbook: 001-install-docker.yml.ansible
+
+- ansible.builtin.import_playbook: 001-clone-docker-compose.yml.ansible
+
+- ansible.builtin.import_playbook: 001-start-wordpress.yml.ansible
+

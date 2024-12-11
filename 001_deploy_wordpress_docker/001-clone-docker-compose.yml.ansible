@@ -1,0 +1,14 @@
+---
+- name: Example 001 - Clone Docker Wordpress
+  hosts: all
+  vars:
+    docker_git_url: https://github.com/bertrandpeyce/examples-docker-compose
+    docker_git_dest: "/tmp/examples-docker-compose"
+  tasks:
+    - name: Cloning docker git repo
+      ansible.builtin.include_tasks:
+        file: ../tasks/git/git-clone.yml.ansible
+      vars:
+        git_repo_url: "{{ docker_git_url }}"
+        git_repo_dest: "{{ docker_git_dest }}"
+        git_repo_version: "main"

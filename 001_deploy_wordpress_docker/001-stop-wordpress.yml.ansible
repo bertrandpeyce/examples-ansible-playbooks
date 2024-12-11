@@ -1,0 +1,11 @@
+---
+- name: Stop docker-compose
+  hosts: all
+  vars:
+    docker_compose_dir: "/tmp/examples-docker-compose/000_wordpress"
+  tasks:
+    - name: Including tasks/run-docker-compose.yml.ansible
+      ansible.builtin.include_tasks:
+        file: ../tasks/docker/stop-docker-compose.yml.ansible
+      vars:
+        compose_dir: "{{ docker_compose_dir }}"

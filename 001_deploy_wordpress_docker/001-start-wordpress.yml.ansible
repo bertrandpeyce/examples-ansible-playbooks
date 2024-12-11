@@ -1,0 +1,16 @@
+---
+- name: Example 001 - Start Docker Wordpress
+  hosts: all
+  vars:
+    docker_compose_dir: "/tmp/examples-docker-compose/000_wordpress"
+    wordpress_port: "8080"
+    mysql_port: "3306"
+  environment:
+    WORDPRESS_PORT:  "{{ wordpress_port }}"
+    MYSQL_PORT:   "{{ mysql_port }}" 
+  tasks:
+    - name: Including tasks/run-docker-compose.yml.ansible
+      ansible.builtin.include_tasks:
+        file: ../tasks/docker/run-docker-compose.yml.ansible
+      vars:
+        compose_dir: "{{ docker_compose_dir }}"
