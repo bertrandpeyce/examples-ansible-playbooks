@@ -1,0 +1,46 @@
+---
+- name: Create Toto user in docker group
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    g_user_name: "toto"
+    g_user_comment: "(UwU)"
+    g_user_groups: 
+      - "docker"
+      - "users"
+      - "toto"
+      - "uwu"
+    g_user_email: "toto@example.com"
+    g_user_ssh_public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhrpAyuQIF4gN3aLsNj0nuCVixERib/3trK0jR4O2Y0 toto@example.com"
+    g_user_password_hash: "$6$LUKm/HpBHPla0/2Z$vZfSi1LxKG6/cZbXwEI.yMM.pj1aturzPN.7Q7MMcrh8LLFvprLNGJq3JuYFfqPLkF6MYz2H.7NS9ffojnuh2/"
+  tasks:
+    - block:
+      - name: "Create groups in {{ g_user_groups }}"
+        ansible.builtin.include_tasks:
+          file: ../tasks/user_group/create-group.yml.ansible
+        vars:
+          group_name: "{{ item }}"
+        with_items: "{{ g_user_groups | default([]) }}"
+        
+      - name: Create {{ g_user_name }} user
+        ansible.builtin.include_tasks:
+          file: ../tasks/user_group/create-user.yml.ansible
+        vars:
+          user_name: "{{ g_user_name }}"
+          user_comment: "{{ g_user_comment }}"
+          user_groups: "{{ g_user_groups }}"
+          user_email: "{{ g_user_email }}"
+          user_ssh_public_key: "{{ g_user_ssh_public_key }}"
+          user_password_hash: "{{ g_user_password_hash }}"
+
+      - name: "Check if {{ g_user_name }} user exists and in all specified groups"
+        ansible.builtin.include_tasks:
+          file: ../tasks/user_group/check-user-group.yml.ansible
+        vars:
+          user_name: "{{ g_user_name }}"
+          user_groups: "{{ g_user_groups }}"
+
+      when: ansible_distribution == "Ubuntu"
+
+
