@@ -1,0 +1,4 @@
+- name: gitlab-server
+  src: https://github.com/bertrandpeyce/ansible-role-gitlab-server.git
+  scm: git
+  version: main

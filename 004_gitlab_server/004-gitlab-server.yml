@@ -1,0 +1,6 @@
+---
+- name: Configure a Gitlab server
+  hosts: all
+  become: yes
+  roles:
+    - role: gitlab-server
