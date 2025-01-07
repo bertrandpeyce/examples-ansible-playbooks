@@ -1,8 +1,8 @@
-# Example 004 - Configure a Gitlab server with Ansible
+# Example 004 - Install Gitlab server
 
 ## Description
 
-This example shows how to configure a Gitlab server with Ansible using an ansible role.
+In this example we will install a Gitlab server
 
 ## Requirements
 
@@ -12,14 +12,19 @@ Packages:
 
 ## Usage
 
-1. Install role dependencies
-
+1. Install role requirements with Ansible Galaxy
 ```bash
 ansible-galaxy install -r requirements.yml
 ```
 
-2. Run playbook
+2. If necessary source the .env file
 
 ```bash
-ansible-playbook -i localhost, 004-gitlab-server.yml
+source .env
+```
+
+3. Run the playbook
+
+```bash
+ansible-playbook -i localhost ansible_connection=local, 004-gitlab-server.yml.ansible -K 
 ```

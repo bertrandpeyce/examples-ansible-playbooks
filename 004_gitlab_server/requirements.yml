@@ -1,4 +1,13 @@
+<<<<<<< Updated upstream
 - name: gitlab-server
   src: https://github.com/bertrandpeyce/ansible-role-gitlab-server.git
   scm: git
   version: main
+=======
+---
+- roles:
+  - name: gitlab-server
+    src: https://github.com/bertrandpeyce/ansible-role-gitlab-server.git
+    scm: git
+    version: origin/main
+>>>>>>> Stashed changes
